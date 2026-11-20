@@ -3,741 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>বন্ধু ম্যানেজমেন্ট - ট্যুর ও গ্রুপ অ্যাপ</title>
+<title>বন্ধু ম্যানেজমেন্ট - Demo</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f4f5f7;color:#171717;padding-bottom:32px}
-header{background:#151515;color:#fff;border-bottom:4px solid #d92525;padding:15px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
-.brand{font-weight:800;font-size:19px;display:flex;align-items:center;gap:8px}
-.user-badge{background:#2b2b2b;border:1px solid #444;padding:5px 11px;border-radius:20px;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f4f4;color:#171717}
+header{background:#151515;color:#fff;border-bottom:4px solid #d92525;padding:18px 16px;font-weight:800;font-size:21px;display:flex;justify-content:space-between;align-items:center}
 main{max-width:900px;margin:auto;padding:14px}
-
-/* Login & Setup Screen */
-.login-box{max-width:440px;margin:24px auto;background:#fff;padding:22px;border-radius:20px;box-shadow:0 10px 28px #00000012;border-top:5px solid #d92525}
-.login-box h2{margin:0 0 6px;font-size:21px}
-.login-box p{margin:0 0 14px;font-size:13px;color:#555;line-height:1.5}
-label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px;color:#333}
-input,select,textarea{display:block;width:100%;padding:11px 12px;border:1px solid #d5d7da;border-radius:11px;font:inherit;font-size:14px;background:#fafafa}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#d92525;background:#fff}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;background:#d92525;color:#fff;padding:12px 16px;border-radius:11px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;touch-action:manipulation}
-.btn:active{transform:scale(.99)}
-.btn-full{width:100%;margin-top:14px}
-.btn-dark{background:#181818}
-.btn-light{background:#eceef1;color:#171717}
-.btn-sm{padding:7px 11px;font-size:12px;border-radius:8px}
-
-/* Group Banner */
-.group-bar{background:#fff;border-radius:15px;padding:12px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 3px 10px #00000008;border-left:4px solid #151515;flex-wrap:wrap}
-.group-code{background:#fff0f0;color:#d92525;border:1px dashed #d92525;padding:5px 10px;border-radius:8px;font-weight:800;font-size:13.5px;letter-spacing:.5px}
-
-/* Map */
-.map{position:relative;height:270px;border-radius:18px;overflow:hidden;background:#e3f1e3;border:1px solid #b8d8bb}
+.login{max-width:440px;margin:40px auto;background:white;padding:22px;border-radius:18px;box-shadow:0 8px 24px #0001}
+input,button{font:inherit}input{display:block;width:100%;padding:12px;border:1px solid #d7d7d7;border-radius:10px;margin:10px 0}
+button{border:0;background:#d92525;color:white;padding:12px 16px;border-radius:10px;cursor:pointer}
+.map{position:relative;height:280px;border-radius:18px;overflow:hidden;background:#e3f1e3;border:1px solid #b8d8bb}
 .map svg{position:absolute;width:100%;height:100%;inset:0}
-.maphead{position:absolute;top:12px;left:12px;background:#f0faf0ee;padding:9px 12px;border-radius:12px;box-shadow:0 2px 8px #0002;z-index:2}
-.maphead strong{display:block;font-size:13px}.maphead small{color:#2f7a46;font-size:11px}
-.gps-btn{position:absolute;top:12px;right:12px;z-index:2;background:#151515;color:#fff;border:0;padding:8px 11px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px #0003}
-.pin{position:absolute;z-index:2;background:#d92525;color:#fff;border-radius:20px;padding:6px 10px;font-size:12px;font-weight:700;box-shadow:0 2px 7px #0003;cursor:pointer;border:2px solid #fff;transform:translate(-50%,-50%)}
-.pin.me{background:#151515}
-.pin:before{content:"📍 "}
-
-/* Horizontal Strip */
-.sectiontitle{font-weight:800;margin:16px 2px 10px;font-size:15px}
+.maphead{position:absolute;top:12px;left:12px;background:#f0faf0;padding:10px 12px;border-radius:12px;box-shadow:0 2px 8px #0002;z-index:2}
+.maphead strong{display:block}.maphead small{color:#34824c}
+.pin{position:absolute;z-index:2;background:#d92525;color:white;border-radius:20px;padding:6px 9px;font-size:12px;box-shadow:0 2px 7px #0003}
+.pin:before{content:"📍"}.pin{cursor:pointer}
+.p1{top:48%;left:30%}.p2{top:30%;left:60%}.p3{top:65%;left:72%}
+.sectiontitle{font-weight:800;margin:16px 2px 10px}
 .strip{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:10px;padding:4px 2px 12px;scrollbar-width:thin}
-.tile{flex:0 0 112px;min-height:102px;background:#fff;border:1px solid #e1e3e6;border-radius:15px;padding:12px 8px;text-align:center;box-shadow:0 3px 9px #00000008;cursor:pointer;transition:.15s}
-.tile:hover,.tile.active{border-color:#d92525;background:#fff8f8}
-.tile .emoji{font-size:25px;display:block;margin-bottom:6px}
-.tile span:last-child{font-size:12.5px;font-weight:700;line-height:1.25;display:block}
-
-/* Cards */
-.card{background:#fff;border-radius:16px;padding:15px;margin:12px 0;border-left:4px solid #d92525;box-shadow:0 3px 12px #00000008}
-.card-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
-.muted{font-size:12px;color:#5f7185}
-.friends{display:flex;gap:8px;flex-wrap:wrap}
-.friend{background:#e7f4e8;color:#143d1a;padding:8px 11px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid #c6e2c8}
-.friend.me-tag{background:#eceef1;color:#151515;border-color:#d2d5da}
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
-.stat{background:#f7f8fa;padding:10px;border-radius:11px;text-align:center}
-.stat small{display:block;font-size:11px;color:#666}
-.stat strong{font-size:15px}
-.list-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13.5px}
-.list-item:last-child{border-bottom:0}
-.badge-in{color:#1b7a37;font-weight:700}
-.badge-out{color:#d92525;font-weight:700}
-.err-box{background:#fff2f2;border:1px solid #f3b5b5;color:#b41616;padding:10px 12px;border-radius:10px;font-size:13px;margin-top:10px}
-.hidden{display:none!important}
-
-/* Modal */
-.modal-backdrop{position:fixed;inset:0;background:#00000088;display:none;align-items:center;justify-content:center;padding:14px;z-index:50}
-.modal-backdrop.open{display:flex}
-.modal{background:#fff;width:100%;max-width:440px;max-height:88vh;overflow-y:auto;border-radius:18px;padding:18px;box-shadow:0 14px 34px #0005}
-.modal h3{margin:0 0 10px;font-size:18px}
-.modal-actions{display:flex;gap:10px;margin-top:16px}
-.row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sos-pulse{background:#d92525;color:#fff;padding:14px;border-radius:14px;text-align:center;margin:10px 0}
+.tile{flex:0 0 116px;min-height:108px;background:white;border:1px solid #dedede;border-radius:15px;padding:12px;text-align:center;box-shadow:0 3px 9px #00000008;cursor:pointer}
+.tile .emoji{font-size:26px;display:block;margin-bottom:7px}.tile span:last-child{font-size:13px;font-weight:700}
+.card{background:white;border-radius:16px;padding:15px;margin:12px 0;border-left:4px solid #d92525;box-shadow:0 3px 12px #00000008}
+.muted{font-size:12px;color:#5f7185}.friends{display:flex;gap:8px;flex-wrap:wrap}.friend{background:#e5f2e6;padding:8px 10px;border-radius:10px;font-size:13px}
+.hidden{display:none}
 </style>
 </head>
 <body>
+<header><span>👥 বন্ধু ম্যানেজমেন্ট</span><span style="font-size:13px">Demo</span></header>
 
-<header>
-  <div class="brand">👥 বন্ধু ম্যানেজমেন্ট</div>
-  <div id="headerUser" class="user-badge hidden" onclick="openFeature('প্রোফাইল')">
-    <span id="headerUserName">ইউজার</span> • <span>🔒</span>
-  </div>
-</header>
-
-<!-- STEP 1: ব্যক্তিগত লগইন ও অ্যাডমিন গ্রুপ নম্বর -->
-<section id="loginSection" class="login-box">
-  <h2>🔐 ব্যক্তিগত লগইন ও গ্রুপ</h2>
-  <p>অ্যাডমিন হিসেবে ৪ বা ৫ সংখ্যার একটি গ্রুপ নম্বর দিন। ওই একই নম্বর দিয়ে যে-ই ঢুকবে, সবার গ্রুপ ও ট্যুর প্ল্যান একটিই হবে।</p>
-
-  <label>আপনার নাম</label>
-  <input id="inpName" type="text" placeholder="যেমন: নাহিদ">
-
-  <label>ব্যক্তিগত ইউজার আইডি / মোবাইল</label>
-  <input id="inpUserId" type="text" inputmode="numeric" placeholder="যেমন: 01410096420 বা nahid01">
-
-  <label>৪-ডিজিট ব্যক্তিগত পিন (লগইন লক)</label>
-  <input id="inpPin" type="password" inputmode="numeric" maxlength="4" placeholder="যেমন: 1234">
-
-  <label>গ্রুপ নির্বাচন করুন</label>
-  <select id="inpGroupMode" onchange="toggleGroupInput()">
-    <option value="create">➕ নতুন গ্রুপ তৈরি করুন (অ্যাডমিন ৪ বা ৫ সংখ্যার নম্বর দিন)</option>
-    <option value="join">🔗 দেওয়া ৪ বা ৫ সংখ্যার গ্রুপ নম্বর দিয়ে ঢুকুন</option>
-  </select>
-
-  <div id="createGroupWrap">
-    <label>নতুন গ্রুপের ৪ বা ৫ সংখ্যার নম্বর (অ্যাডমিন কোড)</label>
-    <input id="inpGroupCode" type="text" inputmode="numeric" maxlength="5" placeholder="যেমন: 4521 বা 45218">
-
-    <label>নতুন গ্রুপের নাম (ঐচ্ছিক)</label>
-    <input id="inpGroupName" type="text" placeholder="যেমন: ইন্ডিয়া ট্যুর">
-  </div>
-
-  <div id="joinGroupWrap" class="hidden">
-    <label>অ্যাডমিনের দেওয়া ৪ বা ৫ সংখ্যার গ্রুপ নম্বর</label>
-    <input id="inpJoinCode" type="text" inputmode="numeric" maxlength="5" placeholder="যেমন: 4521 বা 45218">
-  </div>
-
-  <div id="loginError" class="err-box hidden"></div>
-
-  <button type="button" id="enterAppBtn" class="btn btn-full" onclick="loginAndEnter()">অ্যাপে প্রবেশ করুন ➔</button>
-  <p class="muted" style="margin-top:10px;text-align:center">তথ্য আপনার ফোনে সংরক্ষিত থাকবে (সাপোর্ট না থাকলে মেমোরিতে চলবে)।</p>
+<main id="home">
+<section class="map" aria-label="ডেমো মানচিত্র">
+<svg viewBox="0 0 900 300" preserveAspectRatio="none">
+<rect width="900" height="300" fill="#dcebdc"/>
+<path d="M-20 90 Q150 25 300 95 T600 70 T950 130" stroke="#fff" stroke-width="24" fill="none"/>
+<path d="M-30 220 Q180 145 350 225 T700 185 T950 245" stroke="#fff" stroke-width="18" fill="none"/>
+<path d="M150 -10 Q190 90 180 180 T240 320" stroke="#fff" stroke-width="16" fill="none"/>
+<path d="M580 -10 Q540 100 610 190 T560 310" stroke="#fff" stroke-width="20" fill="none"/>
+<path d="M0 155 L900 155" stroke="#c5d8c5" stroke-width="3" fill="none"/>
+</svg>
+<div class="maphead"><strong>📍 লাইভ লোকেশন</strong><small>লোকেশন অটো • ডেমো ম্যাপ</small></div>
+<div class="pin p1" onclick="showFriend('বন্ধু ১',1.2,23,8,10)">আপনি</div>
+<div class="pin p2" onclick="showFriend('বন্ধু ১',3.2,42,12,15)">বন্ধু ১</div>
+<div class="pin p3" onclick="showFriend('বন্ধু ২',0.8,12,5,7)">বন্ধু ২</div>
 </section>
-
-<!-- PIN UNLOCK SCREEN -->
-<section id="pinUnlockSection" class="login-box hidden">
-  <h2>🔒 পিন দিয়ে আনলক করুন</h2>
-  <p id="welcomeBackText">স্বাগতম!</p>
-  <label>আপনার ৪-ডিজিট পিন দিন</label>
-  <input id="unlockPinInput" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
-  <div id="unlockError" class="err-box hidden"></div>
-  <button type="button" id="unlockAppBtn" class="btn btn-full" onclick="unlockWithPin()">আনলক করুন</button>
-  <button type="button" id="resetAccBtn" class="btn btn-light btn-full" style="margin-top:8px" onclick="resetAccount()">অন্য আইডি / নতুন গ্রুপ</button>
-</section>
-
-<!-- MAIN APP HOME -->
-<main id="homeSection" class="hidden">
-
-  <!-- গ্রুপ নম্বর ও ট্যুর বার -->
-  <div class="group-bar">
-    <div>
-      <strong id="dispGroupName" style="font-size:15px">ট্যুর গ্রুপ</strong>
-      <div class="muted" id="dispTripSummary">গন্তব্য সেট করা হয়নি</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:6px">
-      <span class="group-code" id="dispGroupId" title="গ্রুপ নম্বর">#0000</span>
-      <button type="button" class="btn btn-dark btn-sm" onclick="copyGroupInvite()">📋 শেয়ার</button>
-    </div>
-  </div>
-
-  <!-- মানচিত্র ও লাইভ পিন -->
-  <section class="map" aria-label="গ্রুপ মানচিত্র">
-    <svg viewBox="0 0 900 300" preserveAspectRatio="none">
-      <rect width="900" height="300" fill="#dcebdc"/>
-      <path d="M-20 90 Q150 25 300 95 T600 70 T950 130" stroke="#fff" stroke-width="24" fill="none"/>
-      <path d="M-30 220 Q180 145 350 225 T700 185 T950 245" stroke="#fff" stroke-width="18" fill="none"/>
-      <path d="M150 -10 Q190 90 180 180 T240 320" stroke="#fff" stroke-width="16" fill="none"/>
-      <path d="M580 -10 Q540 100 610 190 T560 310" stroke="#fff" stroke-width="20" fill="none"/>
-      <path d="M0 155 L900 155" stroke="#c5d8c5" stroke-width="3" fill="none"/>
-    </svg>
-    <div class="maphead">
-      <strong>📍 গ্রুপ লাইভ লোকেশন</strong>
-      <small id="gpsStatusText">লোকেশন অটো • ট্যাপ করে দূরত্ব দেখুন</small>
-    </div>
-    <button type="button" class="gps-btn" onclick="updateMyRealGPS()">📡 আমার GPS আপডেট</button>
-    <div id="mapPinsContainer"></div>
-  </section>
-
-  <!-- সব ফিচার এক লাইনে -->
-  <div class="sectiontitle">সব ফিচার — এক লাইনে</div>
-  <div class="strip">
-    <div class="tile" onclick="openFeature('বন্ধু')"><span class="emoji">👫</span><span>বন্ধু</span></div>
-    <div class="tile" onclick="openFeature('ট্রিপ পরিকল্পনা')"><span class="emoji">🧭</span><span>ট্রিপ পরিকল্পনা</span></div>
-    <div class="tile" onclick="openFeature('হিসাবের খাতা')"><span class="emoji">📒</span><span>হিসাবের খাতা</span></div>
-    <div class="tile" onclick="openFeature('গ্রুপ কল ও মেসেজ')"><span class="emoji">📞💬</span><span>গ্রুপ মেসেজ</span></div>
-    <div class="tile" onclick="openFeature('জরুরি SOS')"><span class="emoji">🆘</span><span>জরুরি SOS</span></div>
-    <div class="tile" onclick="openFeature('প্রোফাইল')"><span class="emoji">👤</span><span>প্রোফাইল</span></div>
-    <div class="tile" onclick="openFeature('সেটিংস')"><span class="emoji">⚙️</span><span>সেটিংস</span></div>
-  </div>
-
-  <!-- গ্রুপের সদস্য -->
-  <div class="card">
-    <div class="card-head">
-      <strong>👥 এই গ্রুপের সদস্য (<span id="memberCount">1</span> জন)</strong>
-      <button type="button" class="btn btn-sm" onclick="openFeature('বন্ধু')">+ বন্ধু যোগ</button>
-    </div>
-    <div class="friends" id="friendsListBar"></div>
-  </div>
-
-  <!-- ব্যক্তিগত হিসাবের খাতা -->
-  <div class="card">
-    <div class="card-head">
-      <strong>👤 আপনার ব্যক্তিগত ট্যুর হিসাব</strong>
-      <button type="button" class="btn btn-sm" onclick="openFeature('হিসাবের খাতা')">+ জমা/খরচ</button>
-    </div>
-    <div class="stat-row">
-      <div class="stat"><small>মোট জমা</small><strong id="statIn" class="badge-in">৳০</strong></div>
-      <div class="stat"><small>মোট খরচ</small><strong id="statOut" class="badge-out">৳০</strong></div>
-      <div class="stat"><small>অবশিষ্ট ব্যালেন্স</small><strong id="statBal">৳০</strong></div>
-    </div>
-    <small class="muted">শুধু আপনার ব্যক্তিগত হিসাব এখানে দেখানো হচ্ছে—অন্য কারও সাথে মেশানো হবে না।</small>
-  </div>
-
+<div class="sectiontitle">সব ফিচার — এক লাইনে</div>
+<div class="strip">
+<div class="tile" onclick="demo('বন্ধু')"><span class="emoji">👫</span><span>বন্ধু</span></div>
+<div class="tile" onclick="demo('হিসাবের খাতা')"><span class="emoji">📒</span><span>হিসাবের খাতা</span></div>
+<div class="tile" onclick="demo('গ্রুপ কল ও মেসেজ')"><span class="emoji">📞💬</span><span>গ্রুপ কল ও মেসেজ</span></div>
+<div class="tile" onclick="demo('ট্রিপ পরিকল্পনা')"><span class="emoji">🧭</span><span>ট্রিপ পরিকল্পনা</span></div>
+<div class="tile" onclick="demo('জরুরি SOS')"><span class="emoji">🆘</span><span>জরুরি SOS</span></div>
+<div class="tile" onclick="demo('প্রোফাইল')"><span class="emoji">👤</span><span>প্রোফাইল</span></div>
+<div class="tile" onclick="demo('সেটিংস')"><span class="emoji">⚙️</span><span>সেটিংস</span></div>
+</div>
+<div class="card"><strong>👥 বন্ধুদের অবস্থান (ডেমো)</strong><div class="friends" style="margin-top:10px"><div class="friend">বন্ধু ১ • ১.২ কিমি</div><div class="friend">বন্ধু ২ • ৩.৪ কিমি</div><div class="friend">বন্ধু ৩ • ৫০০ মিটার</div></div></div>
+<div class="card"><strong>👤 আপনার ব্যক্তিগত হিসাব</strong><p>জমা: ৳৫,০০০ &nbsp; | &nbsp; খরচ: ৳১,২০০ &nbsp; | &nbsp; ব্যালেন্স: ৳৩,৮০০</p><small class="muted">শুধু আপনার হিসাব এখানে দেখানো হয়েছে—গ্রুপের সম্মিলিত হিসাব নেই।</small></div>
+<p class="muted">এটি শুধু UI ডেমো। লগইন, Firebase, বাস্তব লোকেশন, কল বা মেসেজ কাজ করছে না। মানচিত্রে নমুনা অবস্থান দেখানো হয়েছে।</p>
 </main>
-
-<!-- FRIEND DISTANCE MODAL -->
-<div id="friendModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('friendModal')">
-  <div class="modal">
-    <h3 id="friendTitle"></h3>
-    <p id="friendDistance" style="margin:6px 0;font-weight:700;color:#d92525"></p>
-    <p id="friendTimes" style="margin:8px 0;line-height:1.65;font-size:14px"></p>
-    <div class="modal-actions">
-      <a id="mapsLink" class="btn" target="_blank" rel="noopener">🗺️ Google Maps-এ পথ দেখুন</a>
-      <button type="button" class="btn btn-light" onclick="closeModal('friendModal')">বন্ধ করুন</button>
-    </div>
-  </div>
-</div>
-
-<!-- FEATURE MODAL -->
-<div id="featureModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('featureModal')">
-  <div class="modal">
-    <div class="card-head" style="margin-bottom:6px">
-      <h3 id="featureTitle" style="margin:0"></h3>
-      <button type="button" class="btn btn-light btn-sm" onclick="closeModal('featureModal')">✕</button>
-    </div>
-    <div id="featureBody"></div>
-  </div>
-</div>
-
 <script>
-const STORAGE_KEY = 'bondhu_app_v4';
-let memoryStore = null;
-
-function createDefaultData(groupCode, groupName, user, isAdmin) {
-  return {
-    user: user,
-    group: {
-      id: groupCode,
-      name: groupName || ('ট্যুর গ্রুপ #' + groupCode),
-      adminId: isAdmin && user ? user.id : 'admin_' + groupCode
-    },
-    members: [
-      {
-        id: user ? user.id : 'u1',
-        name: user ? user.name : 'আপনি',
-        isMe: true,
-        km: 0,
-        walk: 0,
-        bike: 0,
-        car: 0,
-        lat: 23.7950,
-        lng: 90.3850,
-        top: 55,
-        left: 32
-      }
-    ],
-    trip: {
-      destination: groupName || 'ট্যুর গন্তব্য',
-      date: 'নির্ধারিত তারিখ',
-      note: 'গ্রুপ নম্বর #' + groupCode + ' এর ট্যুর প্ল্যান।'
-    },
-    ledger: [],
-    messages: [
-      { sender: 'সিস্টেম', text: 'গ্রুপ #' + groupCode + '-এ স্বাগতম! একই নম্বর দিয়ে ঢোকা সবাই এই গ্রুপের অংশ।' }
-    ]
-  };
+function sendDemoCode(){
+ let n=document.getElementById('name').value.trim();
+ let e=document.getElementById('email').value.trim();
+ let p=document.getElementById('password').value;
+ if(!n||!e||!p){alert('নাম, Gmail ও পাসওয়ার্ড পূরণ করুন');return}
+ if(!/^[^\\s@]+@gmail\\.com$/i.test(e)){alert('একটি Gmail ঠিকানা দিন');return}
+ document.getElementById('verifyArea').classList.remove('hidden');
+ alert('ডেমোতে কোড পাঠানোর ধাপ দেখানো হচ্ছে। বাস্তব Gmail-এ কোড পাঠানো চালু নেই।');
 }
-
-let appData = createDefaultData('0000', 'ট্যুর গ্রুপ', null, true);
-
-function readSaved(key) {
-  try {
-    const raw = window.localStorage.getItem(key);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {}
-  return memoryStore;
+function verifyDemo(){
+ if(document.getElementById('otp').value.trim()!=='123456'){alert('ডেমো কোড সঠিক নয়। 123456 দিন।');return}
+ document.getElementById('login').classList.add('hidden');
+ document.getElementById('home').classList.remove('hidden');
 }
-
-function writeSaved(key, obj) {
-  memoryStore = JSON.parse(JSON.stringify(obj));
-  try {
-    window.localStorage.setItem(key, JSON.stringify(obj));
-  } catch (e) {}
+function demo(feature){
+ if(feature==='ট্রিপ পরিকল্পনা'){
+   alert('🧭 ট্রিপ পরিকল্পনা\\n\\nযে কজন বন্ধু অ্যাপে যোগ হবে, শুধু তাদের নাম/প্রোফাইল দেখাবে। ৩ জন হলে ৩ জন, ১০ জন হলে ১০ জন—অতিরিক্ত বন্ধু দেখাবে না।\\n\\nএই ডেমোতে ট্রিপ প্ল্যানের নমুনা।');
+   return;
+ }
+ alert(feature+' ফিচারটি এই HTML ডেমোতে এখনো চালু করা হয়নি।');
 }
-
-function clearSaved(key) {
-  memoryStore = null;
-  try {
-    window.localStorage.removeItem(key);
-  } catch (e) {}
+function showFriend(name,km,walk,bike,car){
+ document.getElementById('friendTitle').textContent='👤 '+name;
+ document.getElementById('friendDistance').textContent='📍 দূরে আছে '+km+' কিলোমিটার';
+ document.getElementById('friendTimes').innerHTML='🚶 হাঁটা: আনুমানিক '+walk+' মিনিট<br>🏍️ বাইক: আনুমানিক '+bike+' মিনিট<br>🚗 গাড়ি: আনুমানিক '+car+' মিনিট';
+ // Demo coordinates only; actual friend GPS coordinates are not connected.
+ const dest=(km===3.2?'23.8103,90.4125':km===0.8?'23.7806,90.4070':'23.7950,90.3850');
+ document.getElementById('mapsLink').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(dest)+'&travelmode=driving';
+ const modal=document.getElementById('friendModal'); modal.style.display='flex'; modal.classList.remove('hidden');
 }
-
-function normalizeDigits(str) {
-  const map = {'০':'0','১':'1','২':'2','৩':'3','৪':'4','৫':'5','৬':'6','৭':'7','৮':'8','৯':'9'};
-  return (str || '').trim().replace(/[০-৯]/g, ch => map[ch] || ch);
-}
-
-function showError(id, msg) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.textContent = msg;
-  el.classList.remove('hidden');
-}
-
-function hideError(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.textContent = '';
-  el.classList.add('hidden');
-}
-
-function toggleGroupInput() {
-  hideError('loginError');
-  const mode = document.getElementById('inpGroupMode').value;
-  document.getElementById('createGroupWrap').classList.toggle('hidden', mode !== 'create');
-  document.getElementById('joinGroupWrap').classList.toggle('hidden', mode !== 'join');
-}
-
-function enterHome() {
-  document.getElementById('loginSection').classList.add('hidden');
-  document.getElementById('pinUnlockSection').classList.add('hidden');
-  document.getElementById('homeSection').classList.remove('hidden');
-  document.getElementById('headerUser').classList.remove('hidden');
-  renderAll();
-}
-
-function loginAndEnter() {
-  hideError('loginError');
-
-  const name = (document.getElementById('inpName').value || '').trim() || 'বন্ধু';
-  const userId = (document.getElementById('inpUserId').value || '').trim() || 'user01';
-  const rawPin = normalizeDigits(document.getElementById('inpPin').value || '');
-  const pin = rawPin || '1234';
-  const mode = document.getElementById('inpGroupMode').value;
-
-  let groupCode = '';
-  let groupName = '';
-  let isAdmin = false;
-
-  if (mode === 'create') {
-    const rawCode = normalizeDigits(document.getElementById('inpGroupCode').value || '');
-    groupCode = rawCode || '0852';
-    groupName = (document.getElementById('inpGroupName').value || '').trim() || ('গ্রুপ #' + groupCode);
-    isAdmin = true;
-  } else {
-    const rawJoin = normalizeDigits(document.getElementById('inpJoinCode').value || '');
-    groupCode = rawJoin || '0852';
-    groupName = 'গ্রুপ #' + groupCode;
-    isAdmin = false;
-  }
-
-  const userObj = {
-    name: name,
-    id: userId,
-    pin: pin,
-    isAdmin: isAdmin,
-    lat: 23.7950,
-    lng: 90.3850
-  };
-
-  const existing = readSaved(STORAGE_KEY);
-  if (existing && existing.group && existing.group.id === groupCode) {
-    existing.user = userObj;
-    const alreadyMember = existing.members.some(m => m.id === userId);
-    existing.members.forEach(m => { m.isMe = (m.id === userId); });
-    if (!alreadyMember) {
-      existing.members.push({
-        id: userId,
-        name: name,
-        isMe: true,
-        km: 1.0,
-        walk: 12,
-        bike: 3,
-        car: 4,
-        lat: 23.7950,
-        lng: 90.3850,
-        top: Math.min(78, 25 + (existing.members.length * 14) % 52),
-        left: Math.min(82, 25 + (existing.members.length * 23) % 58)
-      });
-    }
-    appData = existing;
-  } else {
-    appData = createDefaultData(groupCode, groupName, userObj, isAdmin);
-  }
-
-  writeSaved(STORAGE_KEY, appData);
-  enterHome();
-}
-
-function unlockWithPin() {
-  hideError('unlockError');
-  const entered = normalizeDigits(document.getElementById('unlockPinInput').value);
-  if (!entered || (appData.user && entered === appData.user.pin)) {
-    document.getElementById('unlockPinInput').value = '';
-    enterHome();
-  } else {
-    showError('unlockError', 'পিন সঠিক নয়! আবার চেষ্টা করুন।');
-  }
-}
-
-function lockApp() {
-  document.getElementById('homeSection').classList.add('hidden');
-  document.getElementById('headerUser').classList.add('hidden');
-  document.getElementById('pinUnlockSection').classList.remove('hidden');
-  if (appData.user && appData.group) {
-    document.getElementById('welcomeBackText').textContent =
-      'স্বাগতম, ' + appData.user.name + ' (গ্রুপ #' + appData.group.id + ')';
-  }
-}
-
-function resetAccount() {
-  clearSaved(STORAGE_KEY);
-  appData = createDefaultData('0000', 'ট্যুর গ্রুপ', null, true);
-  document.getElementById('pinUnlockSection').classList.add('hidden');
-  document.getElementById('homeSection').classList.add('hidden');
-  document.getElementById('headerUser').classList.add('hidden');
-  document.getElementById('loginSection').classList.remove('hidden');
-  hideError('loginError');
-}
-
-function renderAll() {
-  document.getElementById('headerUserName').textContent = appData.user.name;
-  document.getElementById('dispGroupName').textContent = appData.group.name;
-  document.getElementById('dispGroupId').textContent = '#' + appData.group.id;
-  document.getElementById('dispTripSummary').textContent =
-    '🧭 গন্তব্য: ' + appData.trip.destination + ' • ' + appData.trip.date;
-
-  const pinsWrap = document.getElementById('mapPinsContainer');
-  const listWrap = document.getElementById('friendsListBar');
-  pinsWrap.innerHTML = '';
-  listWrap.innerHTML = '';
-  document.getElementById('memberCount').textContent = appData.members.length;
-
-  appData.members.forEach((m) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pin' + (m.isMe ? ' me' : '');
-    btn.style.top = m.top + '%';
-    btn.style.left = m.left + '%';
-    btn.textContent = m.isMe ? 'আপনি' : m.name;
-    btn.onclick = () => showFriend(m);
-    pinsWrap.appendChild(btn);
-
-    const chip = document.createElement('div');
-    chip.className = 'friend' + (m.isMe ? ' me-tag' : '');
-    chip.textContent = m.isMe ? (m.name + ' (আপনি)') : (m.name + ' • ' + m.km + ' কিমি');
-    chip.onclick = () => showFriend(m);
-    listWrap.appendChild(chip);
-  });
-
-  let totalIn = 0, totalOut = 0;
-  appData.ledger.forEach(item => {
-    if (item.type === 'in') totalIn += item.amount;
-    else totalOut += item.amount;
-  });
-  document.getElementById('statIn').textContent = '৳' + totalIn;
-  document.getElementById('statOut').textContent = '৳' + totalOut;
-  document.getElementById('statBal').textContent = '৳' + (totalIn - totalOut);
-}
-
-function showFriend(m) {
-  document.getElementById('friendTitle').textContent = '👤 ' + m.name + (m.isMe ? ' (আপনি)' : '');
-  const dest = m.lat + ',' + m.lng;
-  if (m.isMe) {
-    document.getElementById('friendDistance').textContent = '📍 আপনি এখন এই অবস্থানে আছেন';
-    document.getElementById('friendTimes').innerHTML =
-      'ইউজার আইডি: <strong>' + m.id + '</strong><br>স্থানাঙ্ক: ' + dest;
-  } else {
-    document.getElementById('friendDistance').textContent = '📍 আপনার থেকে ' + m.km + ' কিলোমিটার দূরে';
-    document.getElementById('friendTimes').innerHTML =
-      '🚶 হাঁটা: আনুমানিক ' + m.walk + ' মিনিট<br>' +
-      '🏍️ বাইক: আনুমানিক ' + m.bike + ' মিনিট<br>' +
-      '🚗 গাড়ি: আনুমানিক ' + m.car + ' মিনিট';
-  }
-  document.getElementById('mapsLink').href =
-    'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest) + '&travelmode=driving';
-  document.getElementById('friendModal').classList.add('open');
-}
-
-function updateMyRealGPS() {
-  const status = document.getElementById('gpsStatusText');
-  if (!navigator.geolocation) {
-    alert('আপনার ব্রাউজারে GPS সাপোর্ট নেই।');
-    return;
-  }
-  status.textContent = '📡 লোকেশন খোঁজা হচ্ছে...';
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      const lat = pos.coords.latitude.toFixed(5);
-      const lng = pos.coords.longitude.toFixed(5);
-      appData.user.lat = lat;
-      appData.user.lng = lng;
-      const me = appData.members.find(x => x.isMe) || appData.members[0];
-      if (me) {
-        me.lat = lat;
-        me.lng = lng;
-      }
-      writeSaved(STORAGE_KEY, appData);
-      status.textContent = '✅ লাইভ GPS আপডেট হয়েছে (' + lat + ', ' + lng + ')';
-    },
-    () => {
-      status.textContent = '⚠️ লোকেশন পারমিশন দেওয়া হয়নি';
-      alert('ফোনের Location (GPS) চালু করে পারমিশন দিন।');
-    }
-  );
-}
-
-function copyGroupInvite() {
-  const shareText =
-    'চলো একসাথে ট্যুর করি!
-' +
-    'গ্রুপ: ' + appData.group.name + '
-' +
-    'গ্রুপ নম্বর: ' + appData.group.id + '
-' +
-    'অ্যাপ খুলে এই ' + appData.group.id + ' নম্বর দিয়ে ঢোকো।';
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(shareText).catch(() => {});
-  }
-  alert('গ্রুপ নম্বর #' + appData.group.id + ' প্রস্তুত:
-
-' + shareText);
-}
-
-function openFeature(name) {
-  const title = document.getElementById('featureTitle');
-  const body = document.getElementById('featureBody');
-  title.textContent = name;
-
-  if (name === 'বন্ধু') {
-    let rows = appData.members.map((m, i) => `
-      <div class="list-item">
-        <div><strong>${m.name}</strong> <span class="muted">(${m.id})</span></div>
-        <div>${m.isMe ? '<span class="muted">আপনি</span>' : `<button class="btn btn-light btn-sm" onclick="removeMember(${i})">বাদ দিন</button>`}</div>
-      </div>`).join('');
-
-    body.innerHTML = `
-      <p class="muted">গ্রুপ নম্বর <strong>#${appData.group.id}</strong>-এর সদস্যরা এখানে থাকবে।</p>
-      <div class="row-2">
-        <input id="newFriendName" placeholder="বন্ধুর নাম">
-        <input id="newFriendId" placeholder="বন্ধুর আইডি/ফোন">
-      </div>
-      <div class="row-2" style="margin-top:8px">
-        <input id="newFriendKm" type="number" step="0.1" placeholder="দূরত্ব (কিমি) যেমন: 1.5">
-        <button class="btn" onclick="addFriendToGroup()">+ গ্রুপে যোগ করুন</button>
-      </div>
-      <div style="margin-top:14px">${rows}</div>
-    `;
-  }
-  else if (name === 'ট্রিপ পরিকল্পনা') {
-    body.innerHTML = `
-      <p class="muted">এই প্ল্যানটি <strong>#${appData.group.id}</strong> গ্রুপের জন্য।</p>
-      <label>গন্তব্যের নাম</label>
-      <input id="tripDest" value="${appData.trip.destination}">
-      <label>ট্যুরের তারিখ</label>
-      <input id="tripDate" value="${appData.trip.date}">
-      <label>প্রয়োজনীয় নোট / মিলিত হওয়ার স্থান</label>
-      <textarea id="tripNote" rows="3">${appData.trip.note}</textarea>
-      <button class="btn btn-full" onclick="saveTripPlan()">ট্রিপ প্ল্যান সেভ করুন</button>
-    `;
-  }
-  else if (name === 'হিসাবের খাতা') {
-    let items = appData.ledger.length
-      ? appData.ledger.slice().reverse().map((l) => `
-        <div class="list-item">
-          <div><strong>${l.title}</strong><div class="muted">${l.date}</div></div>
-          <div class="${l.type === 'in' ? 'badge-in' : 'badge-out'}">${l.type === 'in' ? '+' : '-'} ৳${l.amount}</div>
-        </div>`).join('')
-      : '<p class="muted">এখনো কোনো জমা বা খরচ লেখা হয়নি।</p>';
-
-    body.innerHTML = `
-      <p class="muted">এটি শুধু আপনার ব্যক্তিগত হিসাব—অন্য কারও সাথে মেশানো হবে না।</p>
-      <div class="row-2">
-        <select id="ledType">
-          <option value="in">➕ টাকা জমা</option>
-          <option value="out">➖ টাকা খরচ</option>
-        </select>
-        <input id="ledAmount" type="number" placeholder="টাকার পরিমাণ">
-      </div>
-      <input id="ledTitle" style="margin-top:8px" placeholder="বিবরণ (যেমন: গাড়ি ভাড়া, নাস্তা)">
-      <button class="btn btn-full" onclick="addLedgerEntry()">হিসাবে যোগ করুন</button>
-      <div style="margin-top:12px;max-height:210px;overflow-y:auto">${items}</div>
-    `;
-  }
-  else if (name === 'গ্রুপ কল ও মেসেজ') {
-    let msgs = appData.messages.map(m => `
-      <div style="background:#f3f4f6;padding:8px 11px;border-radius:10px;margin-bottom:6px;font-size:13px">
-        <strong>${m.sender}:</strong> ${m.text}
-      </div>`).join('');
-
-    body.innerHTML = `
-      <div style="max-height:200px;overflow-y:auto;margin-bottom:10px">${msgs}</div>
-      <div style="display:flex;gap:6px">
-        <input id="chatInput" placeholder="গ্রুপে মেসেজ লিখুন...">
-        <button class="btn" onclick="sendGroupMsg()">পাঠান</button>
-      </div>
-      <a class="btn btn-dark btn-full" style="margin-top:10px" target="_blank" rel="noopener"
-         href="https://meet.jit.si/bondhu-group-${encodeURIComponent(appData.group.id)}">📞 ফ্রি গ্রুপ অডিও/ভিডিও কল শুরু করুন</a>
-    `;
-  }
-  else if (name === 'জরুরি SOS') {
-    const sosMsg = encodeURIComponent(
-      '🆘 জরুরি SOS সতর্কবার্তা!
-' +
-      'নাম: ' + appData.user.name + ' (' + appData.user.id + ')
-' +
-      'গ্রুপ নম্বর: #' + appData.group.id + '
-' +
-      'লোকেশন: https://www.google.com/maps?q=' + appData.user.lat + ',' + appData.user.lng
-    );
-    body.innerHTML = `
-      <div class="sos-pulse">
-        <strong style="font-size:17px">🆘 জরুরি সাহায্য সংকেত</strong>
-        <p style="margin:6px 0 0;font-size:13px">বিপদে পড়লে বা দলছুট হলে নিচের বাটনে চাপুন।</p>
-      </div>
-      <a class="btn btn-full" target="_blank" rel="noopener" href="https://wa.me/?text=${sosMsg}">📲 WhatsApp-এ লোকেশন পাঠান</a>
-      <a class="btn btn-dark btn-full" style="margin-top:8px" href="tel:999">📞 জাতীয় জরুরি সেবা (999) কল করুন</a>
-    `;
-  }
-  else if (name === 'প্রোফাইল') {
-    body.innerHTML = `
-      <div class="list-item"><span>নাম</span><strong>${appData.user.name}</strong></div>
-      <div class="list-item"><span>ব্যক্তিগত আইডি</span><strong>${appData.user.id}</strong></div>
-      <div class="list-item"><span>গ্রুপ নম্বর</span><strong>#${appData.group.id}</strong></div>
-      <div class="list-item"><span>ভূমিকা</span><strong>${appData.user.isAdmin ? 'অ্যাডমিন' : 'সদস্য'}</strong></div>
-      <button class="btn btn-dark btn-full" onclick="closeModal('featureModal');lockApp()">🔒 পিন লক করুন</button>
-      <button class="btn btn-light btn-full" style="margin-top:8px" onclick="resetAccount()">🚪 লগআউট / গ্রুপ পরিবর্তন</button>
-    `;
-  }
-  else if (name === 'সেটিংস') {
-    body.innerHTML = `
-      <p style="font-size:13.5px;line-height:1.6">
-        • <strong>গ্রুপ নম্বর (#):</strong> অ্যাডমিন ৪ বা ৫ সংখ্যার যে নম্বর দেবেন, ওই একই নম্বর দিয়ে ঢুকলে সবার গ্রুপ একটিই হবে।<br><br>
-        • <strong>বাংলা ও ইংরেজি সংখ্যা:</strong> পিন এবং গ্রুপ নম্বরে বাংলা বা ইংরেজি যেকোনো সংখ্যা লিখলে অ্যাপ স্বয়ংক্রিয়ভাবে গ্রহণ করবে।
-      </p>
-      <button class="btn btn-light btn-full" onclick="closeModal('featureModal')">ঠিক আছে</button>
-    `;
-  }
-
-  document.getElementById('featureModal').classList.add('open');
-}
-
-function addFriendToGroup() {
-  const fName = document.getElementById('newFriendName').value.trim();
-  const fId = document.getElementById('newFriendId').value.trim() || ('user' + (appData.members.length + 1));
-  const km = parseFloat(normalizeDigits(document.getElementById('newFriendKm').value)) || 1.2;
-
-  if (!fName) {
-    alert('বন্ধুর নাম লিখুন।');
-    return;
-  }
-
-  appData.members.push({
-    id: fId,
-    name: fName,
-    isMe: false,
-    km: km,
-    walk: Math.round(km * 12),
-    bike: Math.max(2, Math.round(km * 3)),
-    car: Math.max(3, Math.round(km * 4)),
-    lat: (23.7950 + (appData.members.length * 0.008)).toFixed(4),
-    lng: (90.3850 + (appData.members.length * 0.009)).toFixed(4),
-    top: Math.min(78, Math.max(22, 25 + (appData.members.length * 14) % 52)),
-    left: Math.min(82, Math.max(18, 25 + (appData.members.length * 23) % 58))
-  });
-
-  writeSaved(STORAGE_KEY, appData);
-  renderAll();
-  openFeature('বন্ধু');
-}
-
-function removeMember(index) {
-  appData.members.splice(index, 1);
-  writeSaved(STORAGE_KEY, appData);
-  renderAll();
-  openFeature('বন্ধু');
-}
-
-function saveTripPlan() {
-  appData.trip.destination = document.getElementById('tripDest').value.trim() || 'নির্ধারিত নয়';
-  appData.trip.date = document.getElementById('tripDate').value.trim() || 'তারিখ নেই';
-  appData.trip.note = document.getElementById('tripNote').value.trim();
-  writeSaved(STORAGE_KEY, appData);
-  renderAll();
-  closeModal('featureModal');
-}
-
-function addLedgerEntry() {
-  const type = document.getElementById('ledType').value;
-  const amount = parseFloat(normalizeDigits(document.getElementById('ledAmount').value));
-  const title = document.getElementById('ledTitle').value.trim() || (type === 'in' ? 'জমা' : 'খরচ');
-  if (!amount || amount <= 0) {
-    alert('সঠিক টাকার পরিমাণ লিখুন।');
-    return;
-  }
-  const today = new Date().toLocaleDateString('bn-BD');
-  appData.ledger.push({ type, amount, title, date: today });
-  writeSaved(STORAGE_KEY, appData);
-  renderAll();
-  openFeature('হিসাবের খাতা');
-}
-
-function sendGroupMsg() {
-  const inp = document.getElementById('chatInput');
-  const txt = inp.value.trim();
-  if (!txt) return;
-  appData.messages.push({ sender: appData.user.name, text: txt });
-  writeSaved(STORAGE_KEY, appData);
-  openFeature('গ্রুপ কল ও মেসেজ');
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-}
-
-(function boot() {
-  const btn = document.getElementById('enterAppBtn');
-  if (btn) {
-    btn.addEventListener('click', loginAndEnter);
-    btn.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      loginAndEnter();
-    }, { passive: false });
-  }
-  const uBtn = document.getElementById('unlockAppBtn');
-  if (uBtn) uBtn.addEventListener('click', unlockWithPin);
-  const rBtn = document.getElementById('resetAccBtn');
-  if (rBtn) rBtn.addEventListener('click', resetAccount);
-
-  const saved = readSaved(STORAGE_KEY);
-  if (saved && saved.user && saved.group) {
-    appData = saved;
-    document.getElementById('loginSection').classList.add('hidden');
-    document.getElementById('pinUnlockSection').classList.remove('hidden');
-    document.getElementById('welcomeBackText').textContent =
-      'স্বাগতম, ' + appData.user.name + ' (গ্রুপ #' + appData.group.id + ')';
-  }
-})();
+function closeFriend(){const modal=document.getElementById('friendModal');modal.style.display='none';modal.classList.add('hidden');}
 </script>
 </body>
 </html>
