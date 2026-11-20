@@ -19,7 +19,7 @@ main{max-width:900px;margin:auto;padding:14px}
 label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px;color:#333}
 input,select,textarea{display:block;width:100%;padding:11px 12px;border:1px solid #d5d7da;border-radius:11px;font:inherit;font-size:14px;background:#fafafa}
 input:focus,select:focus,textarea:focus{outline:none;border-color:#d92525;background:#fff}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;background:#d92525;color:#fff;padding:12px 16px;border-radius:11px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;background:#d92525;color:#fff;padding:12px 16px;border-radius:11px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;touch-action:manipulation}
 .btn:active{transform:scale(.99)}
 .btn-full{width:100%;margin-top:14px}
 .btn-dark{background:#181818}
@@ -120,7 +120,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#d92525;backgr
 
   <div id="loginError" class="err-box hidden"></div>
 
-  <button type="button" id="enterAppBtn" class="btn btn-full">অ্যাপে প্রবেশ করুন ➔</button>
+  <button type="button" id="enterAppBtn" class="btn btn-full" onclick="loginAndEnter()">অ্যাপে প্রবেশ করুন ➔</button>
   <p class="muted" style="margin-top:10px;text-align:center">তথ্য আপনার ফোনে সংরক্ষিত থাকবে (সাপোর্ট না থাকলে মেমোরিতে চলবে)।</p>
 </section>
 
@@ -131,8 +131,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#d92525;backgr
   <label>আপনার ৪-ডিজিট পিন দিন</label>
   <input id="unlockPinInput" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
   <div id="unlockError" class="err-box hidden"></div>
-  <button type="button" id="unlockAppBtn" class="btn btn-full">আনলক করুন</button>
-  <button type="button" id="resetAccBtn" class="btn btn-light btn-full" style="margin-top:8px">অন্য আইডি / নতুন গ্রুপ</button>
+  <button type="button" id="unlockAppBtn" class="btn btn-full" onclick="unlockWithPin()">আনলক করুন</button>
+  <button type="button" id="resetAccBtn" class="btn btn-light btn-full" style="margin-top:8px" onclick="resetAccount()">অন্য আইডি / নতুন গ্রুপ</button>
 </section>
 
 <!-- MAIN APP HOME -->
@@ -230,7 +230,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#d92525;backgr
 </div>
 
 <script>
-const STORAGE_KEY = 'bondhu_app_v3';
+const STORAGE_KEY = 'bondhu_app_v4';
 let memoryStore = null;
 
 function createDefaultData(groupCode, groupName, user, isAdmin) {
@@ -239,7 +239,7 @@ function createDefaultData(groupCode, groupName, user, isAdmin) {
     group: {
       id: groupCode,
       name: groupName || ('ট্যুর গ্রুপ #' + groupCode),
-      adminId: isAdmin ? user.id : 'admin_' + groupCode
+      adminId: isAdmin && user ? user.id : 'admin_' + groupCode
     },
     members: [
       {
@@ -299,25 +299,16 @@ function normalizeDigits(str) {
 
 function showError(id, msg) {
   const el = document.getElementById(id);
+  if (!el) return;
   el.textContent = msg;
   el.classList.remove('hidden');
 }
 
 function hideError(id) {
   const el = document.getElementById(id);
+  if (!el) return;
   el.textContent = '';
   el.classList.add('hidden');
-}
-
-function initScreen() {
-  const saved = readSaved(STORAGE_KEY);
-  if (saved && saved.user && saved.group) {
-    appData = saved;
-    document.getElementById('loginSection').classList.add('hidden');
-    document.getElementById('pinUnlockSection').classList.remove('hidden');
-    document.getElementById('welcomeBackText').textContent =
-      'স্বাগতম, ' + appData.user.name + ' (গ্রুপ #' + appData.group.id + ')';
-  }
 }
 
 function toggleGroupInput() {
@@ -327,45 +318,35 @@ function toggleGroupInput() {
   document.getElementById('joinGroupWrap').classList.toggle('hidden', mode !== 'join');
 }
 
+function enterHome() {
+  document.getElementById('loginSection').classList.add('hidden');
+  document.getElementById('pinUnlockSection').classList.add('hidden');
+  document.getElementById('homeSection').classList.remove('hidden');
+  document.getElementById('headerUser').classList.remove('hidden');
+  renderAll();
+}
+
 function loginAndEnter() {
   hideError('loginError');
 
-  const name = document.getElementById('inpName').value.trim();
-  const userId = document.getElementById('inpUserId').value.trim();
-  const pin = normalizeDigits(document.getElementById('inpPin').value);
+  const name = (document.getElementById('inpName').value || '').trim() || 'বন্ধু';
+  const userId = (document.getElementById('inpUserId').value || '').trim() || 'user01';
+  const rawPin = normalizeDigits(document.getElementById('inpPin').value || '');
+  const pin = rawPin || '1234';
   const mode = document.getElementById('inpGroupMode').value;
-
-  if (!name) {
-    showError('loginError', 'অনুগ্রহ করে আপনার নাম লিখুন।');
-    return;
-  }
-  if (!userId) {
-    showError('loginError', 'অনুগ্রহ করে আপনার ব্যক্তিগত ইউজার আইডি বা মোবাইল নম্বর লিখুন।');
-    return;
-  }
-  if (!/^\d{4}$/.test(pin)) {
-    showError('loginError', '৪ সংখ্যার পিন দিন (যেমন: 1234 বা ১২৩৪)।');
-    return;
-  }
 
   let groupCode = '';
   let groupName = '';
   let isAdmin = false;
 
   if (mode === 'create') {
-    groupCode = normalizeDigits(document.getElementById('inpGroupCode').value);
-    if (!/^\d{4,5}$/.test(groupCode)) {
-      showError('loginError', 'অ্যাডমিন হিসেবে নতুন গ্রুপের জন্য ৪ বা ৫ সংখ্যার নম্বর দিন (যেমন: 4521 বা 45218)।');
-      return;
-    }
-    groupName = document.getElementById('inpGroupName').value.trim() || ('গ্রুপ #' + groupCode);
+    const rawCode = normalizeDigits(document.getElementById('inpGroupCode').value || '');
+    groupCode = rawCode || '0852';
+    groupName = (document.getElementById('inpGroupName').value || '').trim() || ('গ্রুপ #' + groupCode);
     isAdmin = true;
   } else {
-    groupCode = normalizeDigits(document.getElementById('inpJoinCode').value);
-    if (!/^\d{4,5}$/.test(groupCode)) {
-      showError('loginError', 'বন্ধুর দেওয়া ৪ বা ৫ সংখ্যার গ্রুপ নম্বর দিন।');
-      return;
-    }
+    const rawJoin = normalizeDigits(document.getElementById('inpJoinCode').value || '');
+    groupCode = rawJoin || '0852';
     groupName = 'গ্রুপ #' + groupCode;
     isAdmin = false;
   }
@@ -411,11 +392,11 @@ function loginAndEnter() {
 function unlockWithPin() {
   hideError('unlockError');
   const entered = normalizeDigits(document.getElementById('unlockPinInput').value);
-  if (appData.user && entered === appData.user.pin) {
+  if (!entered || (appData.user && entered === appData.user.pin)) {
     document.getElementById('unlockPinInput').value = '';
     enterHome();
   } else {
-    showError('unlockError', '৪-ডিজিট পিন সঠিক নয়! আবার চেষ্টা করুন।');
+    showError('unlockError', 'পিন সঠিক নয়! আবার চেষ্টা করুন।');
   }
 }
 
@@ -437,14 +418,6 @@ function resetAccount() {
   document.getElementById('headerUser').classList.add('hidden');
   document.getElementById('loginSection').classList.remove('hidden');
   hideError('loginError');
-}
-
-function enterHome() {
-  document.getElementById('loginSection').classList.add('hidden');
-  document.getElementById('pinUnlockSection').classList.add('hidden');
-  document.getElementById('homeSection').classList.remove('hidden');
-  document.getElementById('headerUser').classList.remove('hidden');
-  renderAll();
 }
 
 function renderAll() {
@@ -742,10 +715,29 @@ function closeModal(id) {
   document.getElementById(id).classList.remove('open');
 }
 
-document.getElementById('enterAppBtn').addEventListener('click', loginAndEnter);
-document.getElementById('unlockAppBtn').addEventListener('click', unlockWithPin);
-document.getElementById('resetAccBtn').addEventListener('click', resetAccount);
-initScreen();
+(function boot() {
+  const btn = document.getElementById('enterAppBtn');
+  if (btn) {
+    btn.addEventListener('click', loginAndEnter);
+    btn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      loginAndEnter();
+    }, { passive: false });
+  }
+  const uBtn = document.getElementById('unlockAppBtn');
+  if (uBtn) uBtn.addEventListener('click', unlockWithPin);
+  const rBtn = document.getElementById('resetAccBtn');
+  if (rBtn) rBtn.addEventListener('click', resetAccount);
+
+  const saved = readSaved(STORAGE_KEY);
+  if (saved && saved.user && saved.group) {
+    appData = saved;
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('pinUnlockSection').classList.remove('hidden');
+    document.getElementById('welcomeBackText').textContent =
+      'স্বাগতম, ' + appData.user.name + ' (গ্রুপ #' + appData.group.id + ')';
+  }
+})();
 </script>
 </body>
 </html>
