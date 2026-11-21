@@ -1,96 +1,239 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>বন্ধু ম্যানেজমেন্ট - Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বন্ধু ম্যানেজমেন্ট</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f4f4;color:#171717}
-header{background:#151515;color:#fff;border-bottom:4px solid #d92525;padding:18px 16px;font-weight:800;font-size:21px;display:flex;justify-content:space-between;align-items:center}
-main{max-width:900px;margin:auto;padding:14px}
-.login{max-width:440px;margin:40px auto;background:white;padding:22px;border-radius:18px;box-shadow:0 8px 24px #0001}
-input,button{font:inherit}input{display:block;width:100%;padding:12px;border:1px solid #d7d7d7;border-radius:10px;margin:10px 0}
-button{border:0;background:#d92525;color:white;padding:12px 16px;border-radius:10px;cursor:pointer}
-.map{position:relative;height:280px;border-radius:18px;overflow:hidden;background:#e3f1e3;border:1px solid #b8d8bb}
-.map svg{position:absolute;width:100%;height:100%;inset:0}
-.maphead{position:absolute;top:12px;left:12px;background:#f0faf0;padding:10px 12px;border-radius:12px;box-shadow:0 2px 8px #0002;z-index:2}
-.maphead strong{display:block}.maphead small{color:#34824c}
-.pin{position:absolute;z-index:2;background:#d92525;color:white;border-radius:20px;padding:6px 9px;font-size:12px;box-shadow:0 2px 7px #0003}
-.pin:before{content:"📍"}.pin{cursor:pointer}
-.p1{top:48%;left:30%}.p2{top:30%;left:60%}.p3{top:65%;left:72%}
-.sectiontitle{font-weight:800;margin:16px 2px 10px}
-.strip{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:10px;padding:4px 2px 12px;scrollbar-width:thin}
-.tile{flex:0 0 116px;min-height:108px;background:white;border:1px solid #dedede;border-radius:15px;padding:12px;text-align:center;box-shadow:0 3px 9px #00000008;cursor:pointer}
-.tile .emoji{font-size:26px;display:block;margin-bottom:7px}.tile span:last-child{font-size:13px;font-weight:700}
-.card{background:white;border-radius:16px;padding:15px;margin:12px 0;border-left:4px solid #d92525;box-shadow:0 3px 12px #00000008}
-.muted{font-size:12px;color:#5f7185}.friends{display:flex;gap:8px;flex-wrap:wrap}.friend{background:#e5f2e6;padding:8px 10px;border-radius:10px;font-size:13px}
-.hidden{display:none}
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:#fff;font-family:Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+:root{--red:#ff3030;--green:#a5e8b0;--panel:#1d1d1d}
+header{padding:18px;background:#191919;text-align:center;border-bottom:1px solid #333}
+header h2{margin:0;color:#ff3939}
+.page{max-width:600px;margin:auto;padding:15px}
+.card{background:var(--panel);border:1px solid #303030;border-radius:16px;padding:16px;margin-bottom:14px}
+button{border:0;border-radius:10px;padding:12px;background:var(--red);color:white;font-weight:bold}
+input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #444;background:#111;color:white}
+.small{color:#aaa;font-size:13px}
+.hidden{display:none!important}
+#login,#profileSetup{max-width:450px;margin:40px auto;padding:20px}
+.logo{font-size:50px;text-align:center}
+.green{color:var(--green)}
+.map{height:230px;border-radius:15px;background:
+linear-gradient(35deg,#1b382d,#243a32,#182a24);
+position:relative;overflow:hidden;border:1px solid #315443}
+.map:before{content:"";position:absolute;inset:0;background:
+repeating-linear-gradient(45deg,transparent 0 25px,#ffffff09 26px 28px),
+repeating-linear-gradient(-45deg,transparent 0 40px,#ffffff08 41px 43px)}
+.mapText{position:absolute;top:15px;left:15px;background:#111c;padding:8px;border-radius:8px}
+.pin{position:absolute;background:#ff3030;border:3px solid white;border-radius:50%;width:17px;height:17px}
+.pin1{top:55%;left:50%}.pin2{top:28%;left:30%}.pin3{top:72%;left:75%}
+.tiles{display:flex;gap:10px;overflow-x:auto;white-space:nowrap;padding:4px 0 12px}
+.tile{flex:0 0 95px;background:#252525;border:1px solid #383838;border-radius:13px;padding:14px 8px;text-align:center}
+.tile span{display:block;font-size:25px;margin-bottom:8px}
+.tile b{font-size:12px}
+.friendGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.friend{background:#242424;padding:12px 5px;border-radius:12px;text-align:center;min-height:95px}
+.avatar{width:42px;height:42px;border-radius:50%;background:#444;display:grid;place-items:center;margin:auto auto 8px;font-size:20px}
+.friendName{font-size:12px;word-break:break-word}
+h3{margin:5px 0 12px}
+.row{display:flex;gap:8px}
+.row>*{flex:1}
+.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:15px;z-index:5}
+.modalBox{width:100%;max-width:400px;background:#222;padding:20px;border-radius:16px}
+.close{float:right;background:#444;padding:5px 10px}
+footer{text-align:center;color:#777;padding:20px;font-size:12px}
 </style>
 </head>
 <body>
-<header><span>👥 বন্ধু ম্যানেজমেন্ট</span><span style="font-size:13px">Demo</span></header>
 
-<main id="home">
-<section class="map" aria-label="ডেমো মানচিত্র">
-<svg viewBox="0 0 900 300" preserveAspectRatio="none">
-<rect width="900" height="300" fill="#dcebdc"/>
-<path d="M-20 90 Q150 25 300 95 T600 70 T950 130" stroke="#fff" stroke-width="24" fill="none"/>
-<path d="M-30 220 Q180 145 350 225 T700 185 T950 245" stroke="#fff" stroke-width="18" fill="none"/>
-<path d="M150 -10 Q190 90 180 180 T240 320" stroke="#fff" stroke-width="16" fill="none"/>
-<path d="M580 -10 Q540 100 610 190 T560 310" stroke="#fff" stroke-width="20" fill="none"/>
-<path d="M0 155 L900 155" stroke="#c5d8c5" stroke-width="3" fill="none"/>
-</svg>
-<div class="maphead"><strong>📍 লাইভ লোকেশন</strong><small>লোকেশন অটো • ডেমো ম্যাপ</small></div>
-<div class="pin p1" onclick="showFriend('বন্ধু ১',1.2,23,8,10)">আপনি</div>
-<div class="pin p2" onclick="showFriend('বন্ধু ১',3.2,42,12,15)">বন্ধু ১</div>
-<div class="pin p3" onclick="showFriend('বন্ধু ২',0.8,12,5,7)">বন্ধু ২</div>
+<header><h2>👥 বন্ধু ম্যানেজমেন্ট</h2></header>
+
+<!-- LOGIN -->
+<section id="login" class="card">
+<div class="logo">👥</div>
+<h2 style="text-align:center">বন্ধু ম্যানেজমেন্ট</h2>
+<p style="text-align:center;color:#aaa">বন্ধুদের সঙ্গে একসাথে থাকুন</p>
+<button style="width:100%" onclick="demoLogin()">🔐 Google দিয়ে Sign in</button>
+<p class="small" style="text-align:center">Demo login — আসল Google Login সংযোগ করা হয়নি</p>
 </section>
-<div class="sectiontitle">সব ফিচার — এক লাইনে</div>
-<div class="strip">
-<div class="tile" onclick="demo('বন্ধু')"><span class="emoji">👫</span><span>বন্ধু</span></div>
-<div class="tile" onclick="demo('হিসাবের খাতা')"><span class="emoji">📒</span><span>হিসাবের খাতা</span></div>
-<div class="tile" onclick="demo('গ্রুপ কল ও মেসেজ')"><span class="emoji">📞💬</span><span>গ্রুপ কল ও মেসেজ</span></div>
-<div class="tile" onclick="demo('ট্রিপ পরিকল্পনা')"><span class="emoji">🧭</span><span>ট্রিপ পরিকল্পনা</span></div>
-<div class="tile" onclick="demo('জরুরি SOS')"><span class="emoji">🆘</span><span>জরুরি SOS</span></div>
-<div class="tile" onclick="demo('প্রোফাইল')"><span class="emoji">👤</span><span>প্রোফাইল</span></div>
-<div class="tile" onclick="demo('সেটিংস')"><span class="emoji">⚙️</span><span>সেটিংস</span></div>
+
+<!-- PROFILE -->
+<section id="profileSetup" class="card hidden">
+<h2>👤 প্রোফাইল তৈরি করুন</h2>
+<label>আপনার নাম</label>
+<input id="userName" placeholder="নাম লিখুন">
+<label>মোবাইল নম্বর</label>
+<input id="userPhone" placeholder="01XXXXXXXXX" inputmode="numeric">
+<label>প্রোফাইল ছবি</label>
+<input id="userPhoto" type="file" accept="image/*">
+<div id="photoPreview"></div>
+<button style="width:100%" onclick="saveProfile()">প্রবেশ করুন</button>
+</section>
+
+<!-- MAIN APP -->
+<main id="app" class="page hidden">
+
+<!-- LOCATION -->
+<div class="card">
+<h3>📍 লাইভ লোকেশন</h3>
+<div class="map" id="map">
+<div class="mapText">📍 লোকেশন ম্যাপ</div>
+<div class="pin pin1"></div>
+<div class="pin pin2"></div>
+<div class="pin pin3"></div>
 </div>
-<div class="card"><strong>👥 বন্ধুদের অবস্থান (ডেমো)</strong><div class="friends" style="margin-top:10px"><div class="friend">বন্ধু ১ • ১.২ কিমি</div><div class="friend">বন্ধু ২ • ৩.৪ কিমি</div><div class="friend">বন্ধু ৩ • ৫০০ মিটার</div></div></div>
-<div class="card"><strong>👤 আপনার ব্যক্তিগত হিসাব</strong><p>জমা: ৳৫,০০০ &nbsp; | &nbsp; খরচ: ৳১,২০০ &nbsp; | &nbsp; ব্যালেন্স: ৳৩,৮০০</p><small class="muted">শুধু আপনার হিসাব এখানে দেখানো হয়েছে—গ্রুপের সম্মিলিত হিসাব নেই।</small></div>
-<p class="muted">এটি শুধু UI ডেমো। লগইন, Firebase, বাস্তব লোকেশন, কল বা মেসেজ কাজ করছে না। মানচিত্রে নমুনা অবস্থান দেখানো হয়েছে।</p>
+<p class="small">ম্যাপের লাইভ লোকেশন চালু করতে Google Maps ও GPS সংযোগ লাগবে।</p>
+<button onclick="openMaps()" style="width:100%">🗺️ Google Maps খুলুন</button>
+</div>
+
+<!-- FEATURES -->
+<h3>ফিচারসমূহ</h3>
+<div class="tiles">
+<div class="tile" onclick="showFeature('বন্ধু')"><span>👥</span><b>বন্ধু</b></div>
+<div class="tile" onclick="showFeature('হিসাবের খাতা')"><span>📒</span><b>হিসাবের খাতা</b></div>
+<div class="tile" onclick="showFeature('গ্রুপ কল ও মেসেজ')"><span>📞</span><b>কল ও মেসেজ</b></div>
+<div class="tile" onclick="openTour()"><span>🧳</span><b>ট্যুর প্ল্যান</b></div>
+<div class="tile" onclick="showFeature('SOS')"><span>🆘</span><b>SOS</b></div>
+<div class="tile" onclick="showProfile()"><span>👤</span><b>প্রোফাইল</b></div>
+<div class="tile" onclick="showFeature('সেটিংস')"><span>⚙️</span><b>সেটিংস</b></div>
+</div>
+
+<!-- TOUR -->
+<div class="card" id="tourCard">
+<h3>🧳 ট্যুর প্ল্যান / গ্রুপ</h3>
+<p class="small">৪ সংখ্যার কোড দিয়ে গ্রুপ তৈরি করুন অথবা বন্ধুদের গ্রুপে যোগ দিন।</p>
+<div class="row">
+<button onclick="createGroup()">➕ গ্রুপ তৈরি</button>
+<button onclick="joinGroup()">🔗 যোগ দিন</button>
+</div>
+<div id="groupStatus" class="green" style="margin-top:12px"></div>
+</div>
+
+<!-- FRIENDS -->
+<div class="card">
+<h3>👥 বন্ধুরা</h3>
+<div class="friendGrid" id="friendGrid">
+<div class="friend"><div class="avatar">➕</div><div class="friendName">বন্ধু ১</div></div>
+<div class="friend"><div class="avatar">➕</div><div class="friendName">বন্ধু ২</div></div>
+<div class="friend"><div class="avatar">➕</div><div class="friendName">বন্ধু ৩</div></div>
+</div>
+</div>
+
+<div class="card">
+<h3>📒 আমার ব্যক্তিগত হিসাব</h3>
+<p>এই হিসাব শুধু আপনার জন্য।</p>
+<button onclick="showFeature('ব্যক্তিগত হিসাব')">হিসাব খুলুন</button>
+</div>
+
 </main>
+
+<div id="modal" class="modal hidden">
+<div class="modalBox">
+<button class="close" onclick="closeModal()">✕</button>
+<div id="modalContent"></div>
+</div>
+</div>
+
+<footer>বন্ধু ম্যানেজমেন্ট • Personal Friend App</footer>
+
 <script>
-function sendDemoCode(){
- let n=document.getElementById('name').value.trim();
- let e=document.getElementById('email').value.trim();
- let p=document.getElementById('password').value;
- if(!n||!e||!p){alert('নাম, Gmail ও পাসওয়ার্ড পূরণ করুন');return}
- if(!/^[^\\s@]+@gmail\\.com$/i.test(e)){alert('একটি Gmail ঠিকানা দিন');return}
- document.getElementById('verifyArea').classList.remove('hidden');
- alert('ডেমোতে কোড পাঠানোর ধাপ দেখানো হচ্ছে। বাস্তব Gmail-এ কোড পাঠানো চালু নেই।');
+let profile={};
+let photoData="";
+
+function demoLogin(){
+ document.getElementById("login").classList.add("hidden");
+ document.getElementById("profileSetup").classList.remove("hidden");
 }
-function verifyDemo(){
- if(document.getElementById('otp').value.trim()!=='123456'){alert('ডেমো কোড সঠিক নয়। 123456 দিন।');return}
- document.getElementById('login').classList.add('hidden');
- document.getElementById('home').classList.remove('hidden');
+
+document.getElementById("userPhoto").addEventListener("change",function(e){
+ const file=e.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=function(){
+ photoData=reader.result;
+ document.getElementById("photoPreview").innerHTML=
+ '<img src="'+photoData+'" style="width:80px;height:80px;border-radius:50%;object-fit:cover">';
+ };
+ reader.readAsDataURL(file);
+});
+
+function saveProfile(){
+ const name=document.getElementById("userName").value.trim();
+ const phone=document.getElementById("userPhone").value.trim();
+ if(!name||!phone){alert("নাম ও মোবাইল নম্বর দিন");return}
+ profile={name,phone,photo:photoData};
+ localStorage.setItem("bondhuProfile",JSON.stringify(profile));
+ document.getElementById("profileSetup").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
 }
-function demo(feature){
- if(feature==='ট্রিপ পরিকল্পনা'){
-   alert('🧭 ট্রিপ পরিকল্পনা\\n\\nযে কজন বন্ধু অ্যাপে যোগ হবে, শুধু তাদের নাম/প্রোফাইল দেখাবে। ৩ জন হলে ৩ জন, ১০ জন হলে ১০ জন—অতিরিক্ত বন্ধু দেখাবে না।\\n\\nএই ডেমোতে ট্রিপ প্ল্যানের নমুনা।');
-   return;
+
+function createGroup(){
+ const code=String(Math.floor(1000+Math.random()*9000));
+ localStorage.setItem("bondhuGroup",code);
+ document.getElementById("groupStatus").innerHTML=
+ "আপনার গ্রুপ কোড: <strong style='font-size:24px'>"+code+"</strong>";
+ alert("গ্রুপ তৈরি হয়েছে। কোড: "+code);
+}
+
+function joinGroup(){
+ const code=prompt("৪ সংখ্যার গ্রুপ কোড লিখুন");
+ if(!code)return;
+ if(!/^\d{4}$/.test(code)){alert("সঠিক ৪ সংখ্যার কোড দিন");return}
+ localStorage.setItem("bondhuGroup",code);
+ document.getElementById("groupStatus").innerText="গ্রুপ কোড: "+code+" (এই ডেমোতে স্থানীয়ভাবে সংরক্ষিত)";
+}
+
+function openTour(){
+ document.getElementById("tourCard").scrollIntoView({behavior:"smooth"});
+}
+
+function openMaps(){
+ window.open("https://maps.google.com","_blank");
+}
+
+function showProfile(){
+ const p=JSON.parse(localStorage.getItem("bondhuProfile")||"{}");
+ modal("👤 প্রোফাইল",
+ (p.photo?'<img src="'+p.photo+'" width="70" style="border-radius:50%"><br>':'')+
+ "<p>নাম: "+(p.name||"")+"</p>"+
+ "<p>মোবাইল: "+(p.phone||"")+"</p>");
+}
+
+function showFeature(name){
+ if(name==="SOS"){
+ modal("🆘 SOS জরুরি",
+ '<p>জরুরি প্রয়োজনে আপনার অবস্থান বন্ধুদের কাছে পাঠানোর সুবিধা Firebase সংযোগের পর চালু হবে।</p>'+
+ '<button onclick="window.open(\'https://maps.google.com\',\'_blank\')">লোকেশন খুলুন</button>');
+ return;
  }
- alert(feature+' ফিচারটি এই HTML ডেমোতে এখনো চালু করা হয়নি।');
+ modal(name,
+ "<p>"+name+" বিভাগ খোলা হয়েছে।</p>"+
+ "<p class='small'>এই ফিচারটি সম্পূর্ণ চালু করতে Firebase ও প্রয়োজনীয় সার্ভিস সংযোগ করতে হবে।</p>");
 }
-function showFriend(name,km,walk,bike,car){
- document.getElementById('friendTitle').textContent='👤 '+name;
- document.getElementById('friendDistance').textContent='📍 দূরে আছে '+km+' কিলোমিটার';
- document.getElementById('friendTimes').innerHTML='🚶 হাঁটা: আনুমানিক '+walk+' মিনিট<br>🏍️ বাইক: আনুমানিক '+bike+' মিনিট<br>🚗 গাড়ি: আনুমানিক '+car+' মিনিট';
- // Demo coordinates only; actual friend GPS coordinates are not connected.
- const dest=(km===3.2?'23.8103,90.4125':km===0.8?'23.7806,90.4070':'23.7950,90.3850');
- document.getElementById('mapsLink').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(dest)+'&travelmode=driving';
- const modal=document.getElementById('friendModal'); modal.style.display='flex'; modal.classList.remove('hidden');
+
+function modal(title,content){
+ document.getElementById("modalContent").innerHTML="<h3>"+title+"</h3>"+content;
+ document.getElementById("modal").classList.remove("hidden");
 }
-function closeFriend(){const modal=document.getElementById('friendModal');modal.style.display='none';modal.classList.add('hidden');}
+function closeModal(){
+ document.getElementById("modal").classList.add("hidden");
+}
+
+window.onload=function(){
+ const p=localStorage.getItem("bondhuProfile");
+ if(p){
+ profile=JSON.parse(p);
+ document.getElementById("login").classList.add("hidden");
+ document.getElementById("profileSetup").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
+ const code=localStorage.getItem("bondhuGroup");
+ if(code)document.getElementById("groupStatus").innerText="আপনার গ্রুপ কোড: "+code;
+ }
+}
 </script>
 </body>
 </html>
