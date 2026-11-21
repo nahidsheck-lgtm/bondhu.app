@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>বন্ধু ম্যানেজমেন্ট - Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f4f4;color:#171717}
+header{background:#151515;color:#fff;border-bottom:4px solid #d92525;padding:18px 16px;font-weight:800;font-size:21px;display:flex;justify-content:space-between;align-items:center}
+main{max-width:900px;margin:auto;padding:14px}
+.login{max-width:440px;margin:40px auto;background:white;padding:22px;border-radius:18px;box-shadow:0 8px 24px #0001}
+input,button{font:inherit}input{display:block;width:100%;padding:12px;border:1px solid #d7d7d7;border-radius:10px;margin:10px 0}
+button{border:0;background:#d92525;color:white;padding:12px 16px;border-radius:10px;cursor:pointer}
+.map{position:relative;height:280px;border-radius:18px;overflow:hidden;background:#e3f1e3;border:1px solid #b8d8bb}
+.map svg{position:absolute;width:100%;height:100%;inset:0}
+.maphead{position:absolute;top:12px;left:12px;background:#f0faf0;padding:10px 12px;border-radius:12px;box-shadow:0 2px 8px #0002;z-index:2}
+.maphead strong{display:block}.maphead small{color:#34824c}
+.pin{position:absolute;z-index:2;background:#d92525;color:white;border-radius:20px;padding:6px 9px;font-size:12px;box-shadow:0 2px 7px #0003}
+.pin:before{content:"📍"}.pin{cursor:pointer}
+.p1{top:48%;left:30%}.p2{top:30%;left:60%}.p3{top:65%;left:72%}
+.sectiontitle{font-weight:800;margin:16px 2px 10px}
+.strip{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:10px;padding:4px 2px 12px;scrollbar-width:thin}
+.tile{flex:0 0 116px;min-height:108px;background:white;border:1px solid #dedede;border-radius:15px;padding:12px;text-align:center;box-shadow:0 3px 9px #00000008;cursor:pointer}
+.tile .emoji{font-size:26px;display:block;margin-bottom:7px}.tile span:last-child{font-size:13px;font-weight:700}
+.card{background:white;border-radius:16px;padding:15px;margin:12px 0;border-left:4px solid #d92525;box-shadow:0 3px 12px #00000008}
+.muted{font-size:12px;color:#5f7185}.friends{display:flex;gap:8px;flex-wrap:wrap}.friend{background:#e5f2e6;padding:8px 10px;border-radius:10px;font-size:13px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header><span>👥 বন্ধু ম্যানেজমেন্ট</span><span style="font-size:13px">Demo</span></header>
+
+<main id="home">
+<section class="map" aria-label="ডেমো মানচিত্র">
+<svg viewBox="0 0 900 300" preserveAspectRatio="none">
+<rect width="900" height="300" fill="#dcebdc"/>
+<path d="M-20 90 Q150 25 300 95 T600 70 T950 130" stroke="#fff" stroke-width="24" fill="none"/>
+<path d="M-30 220 Q180 145 350 225 T700 185 T950 245" stroke="#fff" stroke-width="18" fill="none"/>
+<path d="M150 -10 Q190 90 180 180 T240 320" stroke="#fff" stroke-width="16" fill="none"/>
+<path d="M580 -10 Q540 100 610 190 T560 310" stroke="#fff" stroke-width="20" fill="none"/>
+<path d="M0 155 L900 155" stroke="#c5d8c5" stroke-width="3" fill="none"/>
+</svg>
+<div class="maphead"><strong>📍 লাইভ লোকেশন</strong><small>লোকেশন অটো • ডেমো ম্যাপ</small></div>
+<div class="pin p1" onclick="showFriend('বন্ধু ১',1.2,23,8,10)">আপনি</div>
+<div class="pin p2" onclick="showFriend('বন্ধু ১',3.2,42,12,15)">বন্ধু ১</div>
+<div class="pin p3" onclick="showFriend('বন্ধু ২',0.8,12,5,7)">বন্ধু ২</div>
+</section>
+<div class="sectiontitle">সব ফিচার — এক লাইনে</div>
+<div class="strip">
+<div class="tile" onclick="demo('বন্ধু')"><span class="emoji">👫</span><span>বন্ধু</span></div>
+<div class="tile" onclick="demo('হিসাবের খাতা')"><span class="emoji">📒</span><span>হিসাবের খাতা</span></div>
+<div class="tile" onclick="demo('গ্রুপ কল ও মেসেজ')"><span class="emoji">📞💬</span><span>গ্রুপ কল ও মেসেজ</span></div>
+<div class="tile" onclick="demo('ট্রিপ পরিকল্পনা')"><span class="emoji">🧭</span><span>ট্রিপ পরিকল্পনা</span></div>
+<div class="tile" onclick="demo('জরুরি SOS')"><span class="emoji">🆘</span><span>জরুরি SOS</span></div>
+<div class="tile" onclick="demo('প্রোফাইল')"><span class="emoji">👤</span><span>প্রোফাইল</span></div>
+<div class="tile" onclick="demo('সেটিংস')"><span class="emoji">⚙️</span><span>সেটিংস</span></div>
+</div>
+<div class="card"><strong>👥 বন্ধুদের অবস্থান (ডেমো)</strong><div class="friends" style="margin-top:10px"><div class="friend">বন্ধু ১ • ১.২ কিমি</div><div class="friend">বন্ধু ২ • ৩.৪ কিমি</div><div class="friend">বন্ধু ৩ • ৫০০ মিটার</div></div></div>
+<div class="card"><strong>👤 আপনার ব্যক্তিগত হিসাব</strong><p>জমা: ৳৫,০০০ &nbsp; | &nbsp; খরচ: ৳১,২০০ &nbsp; | &nbsp; ব্যালেন্স: ৳৩,৮০০</p><small class="muted">শুধু আপনার হিসাব এখানে দেখানো হয়েছে—গ্রুপের সম্মিলিত হিসাব নেই।</small></div>
+<p class="muted">এটি শুধু UI ডেমো। লগইন, Firebase, বাস্তব লোকেশন, কল বা মেসেজ কাজ করছে না। মানচিত্রে নমুনা অবস্থান দেখানো হয়েছে।</p>
+</main>
+<script>
+function sendDemoCode(){
+ let n=document.getElementById('name').value.trim();
+ let e=document.getElementById('email').value.trim();
+ let p=document.getElementById('password').value;
+ if(!n||!e||!p){alert('নাম, Gmail ও পাসওয়ার্ড পূরণ করুন');return}
+ if(!/^[^\\s@]+@gmail\\.com$/i.test(e)){alert('একটি Gmail ঠিকানা দিন');return}
+ document.getElementById('verifyArea').classList.remove('hidden');
+ alert('ডেমোতে কোড পাঠানোর ধাপ দেখানো হচ্ছে। বাস্তব Gmail-এ কোড পাঠানো চালু নেই।');
+}
+function verifyDemo(){
+ if(document.getElementById('otp').value.trim()!=='123456'){alert('ডেমো কোড সঠিক নয়। 123456 দিন।');return}
+ document.getElementById('login').classList.add('hidden');
+ document.getElementById('home').classList.remove('hidden');
+}
+function demo(feature){
+ if(feature==='ট্রিপ পরিকল্পনা'){
+   alert('🧭 ট্রিপ পরিকল্পনা\\n\\nযে কজন বন্ধু অ্যাপে যোগ হবে, শুধু তাদের নাম/প্রোফাইল দেখাবে। ৩ জন হলে ৩ জন, ১০ জন হলে ১০ জন—অতিরিক্ত বন্ধু দেখাবে না।\\n\\nএই ডেমোতে ট্রিপ প্ল্যানের নমুনা।');
+   return;
+ }
+ alert(feature+' ফিচারটি এই HTML ডেমোতে এখনো চালু করা হয়নি।');
+}
+function showFriend(name,km,walk,bike,car){
+ document.getElementById('friendTitle').textContent='👤 '+name;
+ document.getElementById('friendDistance').textContent='📍 দূরে আছে '+km+' কিলোমিটার';
+ document.getElementById('friendTimes').innerHTML='🚶 হাঁটা: আনুমানিক '+walk+' মিনিট<br>🏍️ বাইক: আনুমানিক '+bike+' মিনিট<br>🚗 গাড়ি: আনুমানিক '+car+' মিনিট';
+ // Demo coordinates only; actual friend GPS coordinates are not connected.
+ const dest=(km===3.2?'23.8103,90.4125':km===0.8?'23.7806,90.4070':'23.7950,90.3850');
+ document.getElementById('mapsLink').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(dest)+'&travelmode=driving';
+ const modal=document.getElementById('friendModal'); modal.style.display='flex'; modal.classList.remove('hidden');
+}
+function closeFriend(){const modal=document.getElementById('friendModal');modal.style.display='none';modal.classList.add('hidden');}
+</script>
+</body>
+</html>
